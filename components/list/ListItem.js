@@ -12,6 +12,7 @@ const factory = (ripple, ListItemLayout, ListItemContent) => {
       className: PropTypes.string,
       disabled: PropTypes.bool,
       onClick: PropTypes.func,
+      onTouchTap: PropTypes.func,
       ripple: PropTypes.bool,
       theme: PropTypes.shape({
         listItem: PropTypes.string
@@ -30,6 +31,12 @@ const factory = (ripple, ListItemLayout, ListItemContent) => {
         this.props.onClick(event);
       }
     };
+
+    handleTouchTap = (event) => {
+      if (this.props.onTouchTap && !this.props.disabled) {
+        this.props.onTouchTap(event);
+      }
+    }
 
     groupChildren () {
       const children = {
@@ -66,7 +73,7 @@ const factory = (ripple, ListItemLayout, ListItemContent) => {
       const children = this.groupChildren();
       const content = <ListItemLayout theme={theme} {...children} {...other}/>;
       return (
-        <li className={`${theme.listItem} ${className}`} onClick={this.handleClick} onMouseDown={onMouseDown}>
+        <li className={`${theme.listItem} ${className}`} onClick={this.handleClick} onMouseDown={onMouseDown} onTouchTap={this.handleTouchTap}>
           {to ? <a href={this.props.to}>{content}</a> : content}
           {children.ignored}
         </li>
