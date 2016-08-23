@@ -138,7 +138,7 @@ const rippleFactory = (options = {}) => {
             }, {width, height: width});
 
           return (
-            <ComposedComponent {...other} onMouseDown={this.handleMouseDown} onTouchTap={this.onTouchTap}>
+            <ComposedComponent {...other} onMouseDown={this.handleMouseDown} onTouchTap={this.handleTouchTap}>
               {children ? children : null}
               <span data-react-toolbox='ripple' className={this.props.theme.rippleWrapper} {...props}>
                 <span ref='ripple' role='ripple' className={rippleClassName} style={rippleStyle} />
