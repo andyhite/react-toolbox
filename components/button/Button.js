@@ -25,6 +25,7 @@ const factory = (ripple, FontIcon) => {
       neutral: PropTypes.bool,
       onMouseLeave: PropTypes.func,
       onMouseUp: PropTypes.func,
+      onTouchEnd: PropTypes.func,
       primary: PropTypes.bool,
       raised: PropTypes.bool,
       theme: PropTypes.shape({
@@ -65,6 +66,11 @@ const factory = (ripple, FontIcon) => {
       if (this.props.onMouseLeave) this.props.onMouseLeave(event);
     };
 
+    handleTouchEnd = (event) => {
+      this.refs.button.blur();
+      if (this.props.onTouchEnd) this.props.onTouchEnd(event);
+    };
+
     render () {
       const { accent, children, className, flat, floating, href, icon,
         inverse, label, mini, neutral, primary, theme, raised, ...others} = this.props;
@@ -86,6 +92,7 @@ const factory = (ripple, FontIcon) => {
         disabled: this.props.disabled,
         onMouseUp: this.handleMouseUp,
         onMouseLeave: this.handleMouseLeave,
+        onTouchEnd: this.handleTouchEnd,
         'data-react-toolbox': 'button'
       };
 
