@@ -140,7 +140,7 @@ const rippleFactory = (options = {}) => {
           const onTouchStartOrMouseDown = {};
 
           if (other.onTouchTap) {
-            onTouchStartOrMouseDown.onTouchStart = this.onTouchStart;
+            onTouchStartOrMouseDown.onTouchStart = this.handleTouchStart;
           } else {
             onTouchStartOrMouseDown.onMouseDown = this.handleMouseDown;
           }
