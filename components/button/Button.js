@@ -4,6 +4,9 @@ import { themr } from 'react-css-themr';
 import { BUTTON } from '../identifiers.js';
 import InjectFontIcon from '../font_icon/FontIcon.js';
 import rippleFactory from '../ripple/Ripple.js';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+injectTapEventPlugin();
 
 const factory = (ripple, FontIcon) => {
   class Button extends Component {
