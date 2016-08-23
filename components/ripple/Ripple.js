@@ -102,8 +102,13 @@ const rippleFactory = (options = {}) => {
         };
       }
 
-      handleTouchStart = (event) => {
+      handleMouseDown = (event) => {
         if (!this.props.disabled) this.start(event);
+        if (this.props.onMouseDown) this.props.onMouseDown(event);
+      };
+
+      handleTouchStart = (event) => {
+        if (!this.props.disabled) this.start(event.touches[0], true);
         if (this.props.onTouchStart) this.props.onTouchStart(event);
       };
 
@@ -132,8 +137,16 @@ const rippleFactory = (options = {}) => {
               transform: `translate3d(${-width / 2 + left}px, ${-width / 2 + top}px, 0) scale(${scale})`
             }, {width, height: width});
 
+          const onTouchStartOrMouseDown = {};
+
+          if (other.onTouchTap) {
+            onTouchStartOrMouseDown.onTouchStart = this.onTouchStart;
+          } else {
+            onTouchStartOrMouseDown.onMouseDown = this.handleMouseDown;
+          }
+
           return (
-            <ComposedComponent {...other} onTouchStart={this.handleTouchStart}>
+            <ComposedComponent {...other} {...onTouchStartOrMouseDown}>
               {children ? children : null}
               <span data-react-toolbox='ripple' className={this.props.theme.rippleWrapper} {...props}>
                 <span ref='ripple' role='ripple' className={rippleClassName} style={rippleStyle} />
