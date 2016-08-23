@@ -5,9 +5,6 @@ import { themr } from 'react-css-themr';
 import { RIPPLE } from '../identifiers.js';
 import events from '../utils/events';
 import prefixer from '../utils/prefixer';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-
-injectTapEventPlugin();
 
 const defaults = {
   centered: false,
